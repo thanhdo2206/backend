@@ -1,8 +1,7 @@
-const {bcrypt} = require("../utils/app");
+const bcrypt = require('bcryptjs');
 const dotenv = require("dotenv");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
-const url = require("url");
 const { User, sequelize } = require("../models/index");
 
 dotenv.config();

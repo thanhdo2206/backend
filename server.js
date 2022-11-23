@@ -2,6 +2,8 @@ const express = require('express')
 const rootRouter = require('./routers')
 const {sequelize} = require('./models')
 const path = require('path');
+const dotenv = require("dotenv");
+
 
 
 const app = express()
@@ -18,8 +20,11 @@ app.use("/public",express.static(publicPath));
 //dùng router
 app.use("/api/v1",rootRouter)
 
-app.listen(port, async () => {
-  console.log(`Example app listening on port ${port}`);
+dotenv.config();
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, async () => {
+  console.log(`Example app listening on port ${PORT}`);
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
