@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const {bcrypt} = require("../utils/app");
 const dotenv = require("dotenv");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
