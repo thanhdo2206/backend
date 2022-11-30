@@ -2,13 +2,17 @@ const express = require('express')
 const rootRouter = require('./routers')
 const {sequelize} = require('./models')
 const path = require('path');
+const cors = require('cors');
 const dotenv = require("dotenv");
+
+
+dotenv.config();
 
 
 
 const app = express()
-const port = 8000
 
+app.use(cors());
 
 //cài ứng dụng sử dụng kiểu json
 app.use(express.json());
@@ -20,11 +24,10 @@ app.use("/public",express.static(publicPath));
 //dùng router
 app.use("/api/v1",rootRouter)
 
-dotenv.config();
+const port = process.env.PORT || 8000;
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, async () => {
-  console.log(`Example app listening on port ${PORT}`);
+app.listen(port, async () => {
+  console.log(`Example app listening on port ${port}`);
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');

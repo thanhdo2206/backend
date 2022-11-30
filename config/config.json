@@ -1,10 +1,21 @@
 {
   "development": {
-    "username": "root",
-    "password": "123456789",
-    "database": "ecommerce_db",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "reqyzeoyplcsqo",
+    "password": "25aa15e93a2ab19841b96a063490653384cd6bd6c0111bb2e121a18a6834ce18",
+    "database": "d4mahpsikkhjfe",
+    "host": "ec2-3-209-39-2.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "logging": false,
+    "query": {
+      "raw": true
+    },
+    "timezone": "+07:00",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "root",

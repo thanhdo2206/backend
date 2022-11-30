@@ -5,13 +5,15 @@ const {authenticate} = require("../middlewares/auth/authenticate")
 const {
   checkExistByUserName,
   checkPassword,
+  checkSameUserName
 } = require("../middlewares/validations/checkExist");
 const { uploadImage } = require("../middlewares/upload/uploadImg");
+const { createCart } = require("../controllers/cart.controller");
 const userRouter = express.Router();
 
 userRouter.get("/",getAllUser);
-userRouter.post("/register", register);
-userRouter.post("/login", checkExistByUserName(User), checkPassword, login);
+userRouter.post("/register",checkSameUserName, register,createCart);
+userRouter.post("/login", checkExistByUserName, checkPassword, login);
 // userRouter.post("/refreshToken", refreshToken);
 
 userRouter.put("/upload-avatar/:id",authenticate,uploadImage("avatar") ,uploadAvatar);

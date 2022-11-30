@@ -1,12 +1,13 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
+const url = require("url");
 const { User, sequelize } = require("../models/index");
 
 dotenv.config();
 
-const register = async (req, res) => {
+const register = async (req, res,next ) => {
   const { password, email } = req.body;
   try {
     //mã hóa pass
@@ -17,8 +18,10 @@ const register = async (req, res) => {
     const data = { ...req.body, avatar: avatarUrl, password: hashPassword };
 
     const newUser = await User.create(data);
+    req.newUser = newUser;
 
-    res.status(201).send(newUser);
+    await res.status(201).send(newUser);
+    next();
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -28,6 +31,7 @@ const login = async (req, res) => {
   try {
     const { id, user_name, email, type } = req.user;
     const payload = {
+      id,
       user_name,
       email,
       type,

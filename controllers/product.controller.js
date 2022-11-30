@@ -20,6 +20,7 @@ const getDetailPoduct = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
+  
   const { file } = req;
 
   const dataContent = JSON.parse(req.body.data);

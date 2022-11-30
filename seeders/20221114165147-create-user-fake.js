@@ -20,7 +20,7 @@ module.exports = {
           user_name: "Admin",
           email: "admin@gmail.com",
           password: "12345678",
-          address:"48 Doan Van Cu",
+          address:"48 Nguyen Luong Bang",
           phone_number: "0982837827",
           type: "admin",
           avatar:
