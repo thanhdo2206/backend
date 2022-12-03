@@ -14,12 +14,11 @@ const getAllFeedBackOfProduct = async (req, res) => {
   const { idProduct } = req.query;
   try {
     const [results] =
-      await sequelize.query(`select "Users"."user_name","Users"."avatar", "FeedBacks"."comment_text","FeedBacks"."rating"
-      from "FeedBacks"
-        inner join "Users" on "Users".id = "FeedBacks".user_id
-        inner join "Products" on "Products".id = "FeedBacks".product_id
-      where "Products".id = ${idProduct};`);
-
+      await sequelize.query(`select Users.user_name,Users.avatar, FeedBacks.comment_text,FeedBacks.rating
+    from FeedBacks
+      inner join Users on Users.id = FeedBacks.user_id
+      inner join Products on Products.id = FeedBacks.product_id
+    where Products.id = ${idProduct};`);
     res.status(200).send(results);
   } catch (error) {}
 };

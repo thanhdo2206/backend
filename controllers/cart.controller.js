@@ -38,10 +38,10 @@ const updateCart = async (req, res) => {
 
   try {
     const [result] =
-      await sequelize.query(`select sum("CartItems"."payment_cartItem") as total_cart
-      from "CartItems"
-          where "CartItems".cart_id = ${id}
-          group by "CartItems".cart_id;`);
+      await sequelize.query(`select sum(CartItems.payment_cartItem) as total_cart
+    from CartItems
+    where CartItems.cart_id = ${id}
+    group by CartItems.cart_id`);
 
     const totalCartUpdated = result[0] ? result[0] : { total_cart: 0 };
     console.log("totalCartUpdated", totalCartUpdated);

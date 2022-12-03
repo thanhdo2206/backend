@@ -3,11 +3,10 @@ const { CartItem, sequelize } = require("../models/index");
 const getAllCartItemOfUser = async (req, res) => {
   const { id } = req.cart;
 
-
   try {
     const [results] = await sequelize.query(`select *
-    from "CartItems"
-    where "CartItems".cart_id = ${id}`);
+    from CartItems
+    where CartItems.cart_id = ${id}`);
 
     if (results.length > 0) {
       res.status(201).send(results);

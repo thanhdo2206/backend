@@ -1,34 +1,24 @@
 {
   "development": {
-    "username": "reqyzeoyplcsqo",
-    "password": "25aa15e93a2ab19841b96a063490653384cd6bd6c0111bb2e121a18a6834ce18",
-    "database": "d4mahpsikkhjfe",
-    "host": "ec2-3-209-39-2.compute-1.amazonaws.com",
-    "dialect": "postgres",
-    "logging": false,
-    "query": {
-      "raw": true
-    },
-    "timezone": "+07:00",
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    "username": "ubstkna379egwa76",
+    "password": "oTapNdxpw7emhEUEtfPx",
+    "database": "bidgtrgm8zexvjs9b0bg",
+    "host": "bidgtrgm8zexvjs9b0bg-mysql.services.clever-cloud.com",
+    "dialect": "mysql"
+    
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "ubstkna379egwa76",
+    "password": "oTapNdxpw7emhEUEtfPx",
+    "database": "bidgtrgm8zexvjs9b0bg",
+    "host": "bidgtrgm8zexvjs9b0bg-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "ubstkna379egwa76",
+    "password": "oTapNdxpw7emhEUEtfPx",
+    "database": "bidgtrgm8zexvjs9b0bg",
+    "host": "bidgtrgm8zexvjs9b0bg-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   }
 }

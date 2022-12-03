@@ -6,9 +6,9 @@ const addOrderItems = async (req, res, next) => {
 
   try {
     const [results] =
-      await sequelize.query(`select "product_id","name_product","image_product","price_product","quantity","payment_cartItem"
-      from "CartItems" 
-      where "CartItems".cart_id = ${cartId}`);
+      await sequelize.query(`select product_id,name_product,image_product,price_product,quantity,payment_cartItem
+      from CartItems
+      where CartItems.cart_id = ${cartId}`);
 
     const orderItems = results.map((orderItem) => {
       const { payment_cartItem, ...orderItemRest } = orderItem;
