@@ -55,7 +55,7 @@ const uploadAvatar = async (req, res) => {
   
   
 
-  const urlImage = `http://localhost:8000/${file.path}`;
+  const urlImage = `https://economic.onrender.com/${file.path}`;
 
   const userFind = await User.findOne({
     where: { id },
