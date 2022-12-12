@@ -1,9 +1,12 @@
-const { Order, sequelize } = require("../models/index");
+const { Order, sequelize, User } = require("../models/index");
 
-const getAllOrderOfUser =async (req, res) => {
-    const {user} = req;
+const getAllOrderOfUser = async (req, res) => {
+  const { user } = req;
   try {
-    const listOrder = await Order.findAll({ where: { user_id:user.id }});
+    const listOrder = await Order.findAll({
+      where: { user_id: user.id },
+      include: [{ model: User ,attributes:["user_name"]}],
+    });
     res.status(200).send(listOrder);
   } catch (error) {
     res.status(500).send(error.message);
@@ -28,4 +31,4 @@ const createOrder = async (req, res, next) => {
   }
 };
 
-module.exports = { createOrder,getAllOrderOfUser };
+module.exports = { createOrder, getAllOrderOfUser };

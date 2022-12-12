@@ -1,4 +1,4 @@
-const { OrderItem, CartItem, Cart, sequelize } = require("../models/index");
+const { OrderItem, CartItem, Cart, sequelize,Order ,Product} = require("../models/index");
 
 const addOrderItems = async (req, res, next) => {
   const { newOrder } = req;
@@ -6,7 +6,7 @@ const addOrderItems = async (req, res, next) => {
 
   try {
     const [results] =
-      await sequelize.query(`select product_id,name_product,image_product,price_product,quantity,payment_cartItem
+      await sequelize.query(`select product_id,quantity,payment_cartItem
       from CartItems
       where CartItems.cart_id = ${cartId}`);
 
@@ -14,7 +14,7 @@ const addOrderItems = async (req, res, next) => {
       const { payment_cartItem, ...orderItemRest } = orderItem;
       return {
         ...orderItemRest,
-        payment_orderItem: orderItem.payment_cartItem,
+        payment_orderItem: payment_cartItem,
         order_id: newOrder.id,
       };
     });
@@ -32,11 +32,12 @@ const addOrderItems = async (req, res, next) => {
 };
 
 const getDetailOrder = async (req, res) => {
-  const { idOrder } = req.query;
+  const { idOrder } = req.params;
 
   try {
     const listOrderItem = await OrderItem.findAll({
       where: { order_id: idOrder },
+      include: [{ model: Order }, { model: Product }],
     });
     res.status(201).send(listOrderItem);
   } catch (error) {

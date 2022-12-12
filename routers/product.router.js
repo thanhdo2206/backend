@@ -14,6 +14,6 @@ productRouter.get("/:id",getDetailPoduct );
 productRouter.post("/",authenticate,authorize(["admin"]),uploadImage("imgProduct"),createProduct );
 productRouter.put("/:id",authenticate,authorize(["admin"]),uploadImage("imgProduct"),updateProduct)
 productRouter.delete("/:id",authenticate,authorize(["admin"]),deleteProduct);
-// 
+
 
 module.exports = productRouter;

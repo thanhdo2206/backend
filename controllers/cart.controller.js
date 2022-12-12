@@ -1,6 +1,6 @@
-const { Cart, sequelize } = require("../models/index");
+const { Cart, sequelize ,User} = require("../models/index");
 
-const getTotalCart = async (req, res) => {
+const getCartOfUser = async (req, res) => {
   const { cart } = req;
   try {
     res.status(201).send(cart);
@@ -11,7 +11,9 @@ const getTotalCart = async (req, res) => {
 
 const getAllCart = async (req, res) => {
   try {
-    const listCart = await Cart.findAll();
+    const listCart = await Cart.findAll({
+      include: [{ model: User, as: "user",attributes:["user_name"] }],
+    });
     res.status(201).send(listCart);
   } catch (error) {
     res.status(500).send(error.message);
@@ -19,8 +21,6 @@ const getAllCart = async (req, res) => {
 };
 
 const createCart = async (req, res) => {
-  console.log("thanh");
-
   const { newUser } = req;
 
   try {
@@ -54,4 +54,4 @@ const updateCart = async (req, res) => {
   }
 };
 
-module.exports = { createCart, updateCart, getTotalCart, getAllCart };
+module.exports = { createCart, updateCart, getCartOfUser, getAllCart };

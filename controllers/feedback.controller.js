@@ -24,9 +24,13 @@ const getAllFeedBackOfProduct = async (req, res) => {
 };
 
 const createFeedback = async (req, res) => {
+  const { user } = req;
   const dataFeedback = req.body;
   try {
-    const feedback = await FeedBack.create(dataFeedback);
+    const feedback = await FeedBack.create({
+      ...dataFeedback,
+      user_id: user.id,
+    });
     res.status(201).send(feedback);
   } catch (error) {
     res.status(500).send(error.message);

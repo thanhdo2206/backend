@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({User,CartItem}) {
       
       //quan hệ 1-1 với user 
-      this.belongsTo(User, {foreignKey: "user_id"});
+      this.belongsTo(User, {foreignKey: "user_id",as:"user"});
 
       //quan hệ 1-N với CartItem
       this.hasMany(CartItem, { foreignKey: "cart_id" });

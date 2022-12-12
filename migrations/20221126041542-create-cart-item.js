@@ -23,15 +23,6 @@ module.exports = {
           key: "id",
         },
       },
-      name_product: {
-        type: Sequelize.STRING,
-      },
-      image_product: {
-        type: Sequelize.STRING,
-      },
-      price_product: {
-        type: Sequelize.FLOAT,
-      },
       quantity: {
         type: Sequelize.INTEGER,
       },

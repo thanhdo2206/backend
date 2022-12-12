@@ -1,4 +1,4 @@
-const { CartItem, sequelize } = require("../models/index");
+const { CartItem, sequelize, Product, Cart, User } = require("../models/index");
 
 const getAllCartItemOfUser = async (req, res) => {
   const { id } = req.cart;
@@ -8,8 +8,20 @@ const getAllCartItemOfUser = async (req, res) => {
     from CartItems
     where CartItems.cart_id = ${id}`);
 
+    const cartrItemList = await CartItem.findAll({
+      where: { cart_id: id },
+      include: [
+        { model: Product },
+        {
+          model: Cart,
+          include: [{ model: User, as: "user",attributes: [ "user_name"] }],
+          attributes: ["total_cart"],
+        },
+      ],
+    });
+
     if (results.length > 0) {
-      res.status(201).send(results);
+      res.status(201).send(cartrItemList);
     } else {
       res.status(404).send("There are no products in the cart");
     }
@@ -19,11 +31,11 @@ const getAllCartItemOfUser = async (req, res) => {
 };
 
 const addProductCartItem = async (req, res, next) => {
-  const { price_product, quantity } = req.body;
+  const { price_product, quantity, product_id } = req.body;
   const payment_cartItem = price_product * quantity;
   const { id } = req.cart;
 
-  const data = { ...req.body, payment_cartItem, cart_id: id };
+  const data = { cart_id: id, product_id, quantity, payment_cartItem };
   try {
     // console.log("data",data);
     const newCartItem = await CartItem.create(data);

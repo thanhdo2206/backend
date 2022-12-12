@@ -4,6 +4,6 @@ const { authenticate } = require("../middlewares/auth/authenticate");
 
 const orderItemRouter = express.Router();
 
-orderItemRouter.get("/",authenticate,getDetailOrder);
+orderItemRouter.get("/:idOrder",authenticate,getDetailOrder);
 
 module.exports = orderItemRouter;

@@ -70,11 +70,10 @@ const uploadAvatar = async (req, res) => {
 
 const editProfile = async (req, res) => {
   const { id } = req.params;
-  const { user_name, email, phone_number, address } = req.body;
 
   try {
     await User.update(
-      { user_name, email, phone_number, address },
+      { ...req.body },
       {
         where: { id },
       }
@@ -82,7 +81,6 @@ const editProfile = async (req, res) => {
 
    
     const profileUpdated = await User.findOne({ where: { id },  });
-    // console.log("update", JSON.stringify(profileUpdated, null, 2));
     res.status(200).send(profileUpdated);
   } catch (error) {
     res.status(500).send(error.message);
@@ -98,4 +96,19 @@ const getAllUser = async (req, res) => {
     console.log(error.message);
   }
 }
-module.exports = { register, login, uploadAvatar, editProfile,getAllUser };
+
+const getDetailUser = async (req, res) => {
+  const { id } = req.user;
+  try {
+    const userFind = await User.findOne({
+      where: { id },
+      attributes: { exclude: ["password"] },
+    });
+    res.status(200).send(userFind);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+
+module.exports = { register, login, uploadAvatar, editProfile,getAllUser,getDetailUser };

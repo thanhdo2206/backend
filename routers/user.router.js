@@ -1,6 +1,6 @@
 const express = require("express");
 const { User } = require("../models");
-const { register, login,uploadAvatar,editProfile,getAllUser } = require("../controllers/user.controller");
+const { register, login,uploadAvatar,editProfile,getAllUser, getDetailUser } = require("../controllers/user.controller");
 const {authenticate} = require("../middlewares/auth/authenticate")
 const {
   checkExistByUserName,
@@ -12,6 +12,8 @@ const { createCart } = require("../controllers/cart.controller");
 const userRouter = express.Router();
 
 userRouter.get("/",getAllUser);
+userRouter.get("/get_infor",authenticate,getDetailUser);
+
 userRouter.post("/register",checkSameUserName, register,createCart);
 userRouter.post("/login", checkExistByUserName, checkPassword, login);
 // userRouter.post("/refreshToken", refreshToken);
