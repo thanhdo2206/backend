@@ -1,8 +1,10 @@
-const { Product } = require("../models/index");
+const { Product, Category } = require("../models/index");
 
 const getAllPoduct = async (req, res) => {
   try {
-    const listProduct = await Product.findAll();
+    const listProduct = await Product.findAll({
+      include: [{ model: Category }],
+    });
     res.status(200).send(listProduct);
   } catch (error) {
     res.status(500).send(error);
@@ -12,7 +14,10 @@ const getAllPoduct = async (req, res) => {
 const getDetailPoduct = async (req, res) => {
   const { id } = req.params;
   try {
-    const product = await Product.findOne({ where: { id } });
+    const product = await Product.findOne({
+      where: { id },
+      include: [{ model: Category }],
+    });
     res.status(200).send(product);
   } catch (error) {
     res.status(500).send(error);
@@ -20,7 +25,6 @@ const getDetailPoduct = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  
   const { file } = req;
 
   const dataContent = JSON.parse(req.body.data);
@@ -57,8 +61,6 @@ const updateProduct = async (req, res) => {
 
   const urlImage = file ? `https://economic.onrender.com/${file.path}` : "";
 
-
-
   const dataContent = JSON.parse(req.body.data);
 
   const productEdit = urlImage
@@ -67,8 +69,6 @@ const updateProduct = async (req, res) => {
         image: urlImage,
       }
     : dataContent;
-
-
 
   try {
     await Product.update(
