@@ -26,10 +26,8 @@ const getDetailPoduct = async (req, res) => {
 
 const createProduct = async (req, res) => {
   const { file } = req;
-
-  const dataContent = JSON.parse(req.body.data);
-
   const urlImage = `https://economic.onrender.com/${file.path}`;
+  const dataContent = req.body;
 
   try {
     const newProduct = await Product.create({
@@ -61,7 +59,7 @@ const updateProduct = async (req, res) => {
 
   const urlImage = file ? `https://economic.onrender.com/${file.path}` : "";
 
-  const dataContent = JSON.parse(req.body.data);
+  const dataContent = req.body;
 
   const productEdit = urlImage
     ? {
