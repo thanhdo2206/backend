@@ -86,10 +86,33 @@ const updateProduct = async (req, res) => {
   }
 };
 
+const changeStatusProduct = async (req, res) => {
+  const { id } = req.params;
+  const {status_number} = req.body;
+  console.log("status_number",status_number);
+
+  try {
+    await Product.update(
+      {
+        status_number,
+      },
+      {
+        where: { id },
+      }
+    );
+
+    const productUpdated = await Product.findOne({ where: { id } });
+    res.status(200).send(productUpdated);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   getAllPoduct,
   getDetailPoduct,
   createProduct,
   deleteProduct,
   updateProduct,
+  changeStatusProduct
 };
